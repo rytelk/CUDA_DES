@@ -1,12 +1,8 @@
-#include "cuda_runtime.h"
-#include "device_launch_parameters.h"
+#include <iostream>
+#include <math.h>
 
-#include <stdio.h>
-#include <cstdint>
-
-int main(int argc, char** argv)
+int main(void)
 {
-	printf("%s", "Hello world")
-
-	return 0;
+  std::cout << "Hello world";
+  return 0;
 }
