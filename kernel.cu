@@ -1,8 +1,10 @@
 #include <iostream>
 #include <math.h>
 
+#include "usage.cuh"
+
 int main(void)
 {
-  std::cout << "Hello world";
-  return 0;
+    usage();
+    return 0;
 }
