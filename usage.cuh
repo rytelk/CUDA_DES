@@ -10,5 +10,7 @@ __host__ void usage();
 
 __host__ void usage()
 {
-	std::cout << name << "CUDA DES Cracker\n\n";
+	std::cout << "CUDA DES Cracker\n";
 }
+
+#pragma endregion
