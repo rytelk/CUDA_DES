@@ -1,4 +1,4 @@
-des-brute-force: *.cu *.h
-	nvcc -o des-brute-force kernel.cu
+all: *.cpp *.h
+	g++ -w -Wall -Wextra -Werror -o main main.cpp
 clean:
 	rm -f *.o des-brute-force
