@@ -16,7 +16,7 @@ int main(void)
 
     // Stage 1
 
-    print_bits(key, 8, 64, "Key: ");
+    // print_bits(key, 8, 64, "Key: ");
     uint64_t k_plus = permutate(key, cpu_PC_1, 56, 64);
     // print_bits(k_plus, 7, 64, "K+: ");
 
@@ -41,14 +41,14 @@ int main(void)
 
     // Stage 2
 
-    print_bits(message, 4, 64, "Message: ");
+    // print_bits(message, 4, 64, "Message: ");
     uint64_t ip = permutate(message, cpu_IP, 64, 64);
-    print_bits(ip, 4, 64, "IP: ");
+    // print_bits(ip, 4, 64, "IP: ");
     
     uint64_t left, right;
     split_bits64(ip, &left, &right);
-    print_bits(left, 4, 32, "L_0");
-    print_bits(right, 4, 32, "R_0");
+    // print_bits(left, 4, 32, "L_0");
+    // print_bits(right, 4, 32, "R_0");
 
     uint64_t left_prev, right_prev;
     for (int i = 0; i < 16; i++)
@@ -57,7 +57,13 @@ int main(void)
 		right_prev = right;
 		left = right_prev;
 		right = left_prev ^ f(right_prev, subkeyes[i], cpu_E_BIT, cpu_P, cpu_S);
+        // print_bits(right, 4, 64, "R_" + std::to_string(i + 1));
     }
+
+    uint64_t rl = right << 32 | left;
+    print_bits(rl, 4, 64, "RL");
+    uint64_t encrypted = permutate(rl, cpu_IP_REV, 64, 64);
+    print_hex(encrypted, "Encrypted");
 
     return 0;
 }
