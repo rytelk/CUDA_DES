@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "binary_utils.h"
+#include "binary_utils.cuh"
 
 __host__ __device__ uint64_t f(uint64_t right, uint64_t subkey, int *E_BIT, int *P, int **S);
 __host__ __device__ void create_subkeyes(uint64_t key, uint64_t *subkeyes, int *SHIFTS, int *PC_1, int *PC_2);

@@ -5,10 +5,10 @@
 #include <cstring>
 #include <ctime>
 
-#include "binary_utils.h"
-#include "des.h"
-#include "des_constant_cpu.h"
-#include "des_utils.h"
+#include "binary_utils.cuh"
+#include "des.cuh"
+#include "des_constant_cpu.cuh"
+#include "des_utils.cuh"
 
 __host__ bool cpu_brute_force(char *key_alphabet, int key_length, char *message_alphabet,
                      int message_length, uint64_t ciphertext, uint64_t *message_result, uint64_t *key_result);

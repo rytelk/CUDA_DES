@@ -2,11 +2,11 @@
 #include <sstream>
 #include <math.h>
 
-#include "usage.h"
-#include "binary_utils.h"
-#include "des_constant_cpu.h"
-#include "des.h"
-#include "des_bf_cpu.h"
+#include "usage.cuh"
+#include "binary_utils.cuh"
+#include "des_constant_cpu.cuh"
+#include "des.cuh"
+#include "des_bf_cpu.cuh"
 
 int main(void)
 {
@@ -33,6 +33,6 @@ int main(void)
     {
         // TODO: GPU
     }
-    
+
     return 0;
 }
