@@ -1,4 +1,4 @@
 all: *.cu *.h
-	nvcc main.cu -o main
+	nvcc -std=c++11 main.cu -o main
 clean:
 	rm -f *.o des-brute-force
