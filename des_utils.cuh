@@ -31,7 +31,7 @@ __host__ __device__ uint64_t get_combinations_count(int alphabet_length, int inp
 	return pow(alphabet_length, input_length);
 }
 
-__host__ __device__ void prepare_data()
+__host__ void prepare_data()
 {
     char * key = "ddaac";
     print_string_hex(key, 5, "Key:");
