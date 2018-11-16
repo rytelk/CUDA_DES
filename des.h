@@ -43,7 +43,6 @@ uint64_t f(uint64_t right, uint64_t subkey, int *E_BIT, int *P, int **S)
     right ^= subkey;
     //print_bits(right, 6, 48, "XORED R");
 
-    int i = 7;
     uint64_t result = 0;
 
     for (int i = 0; i < 8; i++)

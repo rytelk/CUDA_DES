@@ -34,7 +34,6 @@ uint64_t get_combinations_count(int alphabet_length, int input_length)
 void prepare_data()
 {
     char * key = "ddaac";
-    int64_t key_hex = 0x6464616163;
     print_string_hex(key, 5, "Key:");
 
     char * message = "cca";
