@@ -10,12 +10,12 @@
 #include "des_constant_cpu.h"
 #include "des_utils.h"
 
-bool cpu_brute_force(char *key_alphabet, int key_length, char *message_alphabet,
+__host__ bool cpu_brute_force(char *key_alphabet, int key_length, char *message_alphabet,
                      int message_length, uint64_t ciphertext, uint64_t *message_result, uint64_t *key_result);
-void des_brute_force_cpu(char *key_alphabet, int key_length, char *message_alphabet, int message_length, uint64_t ciphertext);
+__host__ void des_brute_force_cpu(char *key_alphabet, int key_length, char *message_alphabet, int message_length, uint64_t ciphertext);
 
 
-bool cpu_brute_force(char *key_alphabet, int key_length, char *message_alphabet,
+__host__ bool cpu_brute_force(char *key_alphabet, int key_length, char *message_alphabet,
                      int message_length, uint64_t ciphertext, uint64_t *message_result, uint64_t *key_result)
 {
     int64_t key_alphabet_length = (int64_t)std::strlen(key_alphabet);
@@ -46,7 +46,7 @@ bool cpu_brute_force(char *key_alphabet, int key_length, char *message_alphabet,
     return false;
 }
 
-void des_brute_force_cpu(char *key_alphabet, int key_length, char *message_alphabet, int message_length, uint64_t ciphertext)
+__host__ void des_brute_force_cpu(char *key_alphabet, int key_length, char *message_alphabet, int message_length, uint64_t ciphertext)
 {
     std::cout << "DES CPU" << std::endl;
     std::chrono::steady_clock::time_point cpu_start, cpu_end;

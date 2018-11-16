@@ -7,11 +7,11 @@
 #include "des.h"
 #include "des_constant_cpu.h"
 
-uint64_t create_combination(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t combination_length);
-uint64_t get_combinations_count(int alphabet_length, int input_length);
-void prepare_data();
+__host__ __device__ uint64_t create_combination(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t combination_length);
+__host__ __device__ uint64_t get_combinations_count(int alphabet_length, int input_length);
+__host__ __device__ void prepare_data();
 
-uint64_t create_combination(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t combination_length)
+__host__ __device__ uint64_t create_combination(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t combination_length)
 {
     uint64_t result = 0;
 
@@ -26,12 +26,12 @@ uint64_t create_combination(uint64_t combination_number, char* alphabet, int32_t
 	return result;
 }
 
-uint64_t get_combinations_count(int alphabet_length, int input_length)
+__host__ __device__ uint64_t get_combinations_count(int alphabet_length, int input_length)
 {
 	return pow(alphabet_length, input_length);
 }
 
-void prepare_data()
+__host__ __device__ void prepare_data()
 {
     char * key = "ddaac";
     print_string_hex(key, 5, "Key:");

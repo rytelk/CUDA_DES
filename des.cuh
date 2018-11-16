@@ -4,12 +4,12 @@
 
 #include "binary_utils.h"
 
-uint64_t f(uint64_t right, uint64_t subkey, int *E_BIT, int *P, int **S);
-void create_subkeyes(uint64_t key, uint64_t *subkeyes, int *SHIFTS, int *PC_1, int *PC_2);
-uint64_t des_encrypt(uint64_t message, uint64_t *subkeyes, int *IP, int *IP_REV, int *E_BIT, int *P, int **S);
-bool verify(uint64_t key, uint64_t message, uint64_t ciphertext, int *IP, int *IP_REV, int *E_BIT, int *P, int **S, int *SHIFTS, int *PC_1, int *PC_2);
+__host__ __device__ uint64_t f(uint64_t right, uint64_t subkey, int *E_BIT, int *P, int **S);
+__host__ __device__ void create_subkeyes(uint64_t key, uint64_t *subkeyes, int *SHIFTS, int *PC_1, int *PC_2);
+__host__ __device__ uint64_t des_encrypt(uint64_t message, uint64_t *subkeyes, int *IP, int *IP_REV, int *E_BIT, int *P, int **S);
+__host__ __device__ bool verify(uint64_t key, uint64_t message, uint64_t ciphertext, int *IP, int *IP_REV, int *E_BIT, int *P, int **S, int *SHIFTS, int *PC_1, int *PC_2);
 
-void create_subkeyes(uint64_t key, uint64_t *subkeyes, int *SHIFTS, int *PC_1, int *PC_2)
+__host__ __device__ void create_subkeyes(uint64_t key, uint64_t *subkeyes, int *SHIFTS, int *PC_1, int *PC_2)
 {
     // print_bits(key, 8, 64, "Key: ");
     uint64_t k_plus = permutate(key, PC_1, 56, 64);
@@ -35,7 +35,7 @@ void create_subkeyes(uint64_t key, uint64_t *subkeyes, int *SHIFTS, int *PC_1, i
     }
 }
 
-uint64_t f(uint64_t right, uint64_t subkey, int *E_BIT, int *P, int **S)
+__host__ __device__ uint64_t f(uint64_t right, uint64_t subkey, int *E_BIT, int *P, int **S)
 {
     //print_bits(right, 4, 32, "R");
     right = permutate(right, E_BIT, 48, 32);
@@ -71,7 +71,7 @@ uint64_t f(uint64_t right, uint64_t subkey, int *E_BIT, int *P, int **S)
     return result;
 }
 
-uint64_t des_encrypt(uint64_t message, uint64_t *subkeyes, int *IP, int *IP_REV, int *E_BIT, int *P, int **S)
+__host__ __device__ uint64_t des_encrypt(uint64_t message, uint64_t *subkeyes, int *IP, int *IP_REV, int *E_BIT, int *P, int **S)
 {
     // print_bits(message, 4, 64, "Message: ");
     uint64_t ip = permutate(message, IP, 64, 64);
@@ -99,7 +99,7 @@ uint64_t des_encrypt(uint64_t message, uint64_t *subkeyes, int *IP, int *IP_REV,
     return encrypted;
 }
 
-bool verify(uint64_t key, uint64_t message, uint64_t ciphertext, int *IP, int *IP_REV, int *E_BIT, int *P, int **S, int *SHIFTS, int *PC_1, int *PC_2)
+__host__ __device__ bool verify(uint64_t key, uint64_t message, uint64_t ciphertext, int *IP, int *IP_REV, int *E_BIT, int *P, int **S, int *SHIFTS, int *PC_1, int *PC_2)
 {
     uint64_t subkeyes[16];
     create_subkeyes(key, subkeyes, SHIFTS, PC_1, PC_2);
