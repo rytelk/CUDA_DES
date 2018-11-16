@@ -7,6 +7,7 @@
 uint64_t f(uint64_t right, uint64_t subkey, int *E_BIT, int *P, int **S);
 void create_subkeyes(uint64_t key, uint64_t *subkeyes, int *SHIFTS, int *PC_1, int *PC_2);
 uint64_t des_encrypt(uint64_t message, uint64_t *subkeyes, int *IP, int *IP_REV, int *E_BIT, int *P, int **S);
+bool verify(uint64_t key, uint64_t message, uint64_t ciphertext, int *IP, int *IP_REV, int *E_BIT, int *P, int **S, int *SHIFTS, int *PC_1, int *PC_2);
 
 void create_subkeyes(uint64_t key, uint64_t *subkeyes, int *SHIFTS, int *PC_1, int *PC_2)
 {
@@ -97,4 +98,11 @@ uint64_t des_encrypt(uint64_t message, uint64_t *subkeyes, int *IP, int *IP_REV,
     uint64_t encrypted = permutate(rl, IP_REV, 64, 64);
 
     return encrypted;
+}
+
+bool verify(uint64_t key, uint64_t message, uint64_t ciphertext, int *IP, int *IP_REV, int *E_BIT, int *P, int **S, int *SHIFTS, int *PC_1, int *PC_2)
+{
+    uint64_t subkeyes[16];
+    create_subkeyes(key, subkeyes, SHIFTS, PC_1, PC_2);
+    return ciphertext == des_encrypt(message, subkeyes, IP, IP_REV, E_BIT, P, S);
 }

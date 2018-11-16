@@ -7,18 +7,18 @@
 #include "des.h"
 #include "des_constant_cpu.h"
 
-uint64_t create_pattern(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t segment_length);
+uint64_t create_combination(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t combination_length);
 uint64_t get_combinations_count(int alphabet_length, int input_length);
+void prepare_data();
 
-uint64_t create_pattern(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t value_length)
+uint64_t create_combination(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t combination_length)
 {
-	int limit = 8 - value_length;
-	
     uint64_t result = 0;
-	for (int i = 8; --i >= limit;)
+
+	for (int i = 7; i >= 8 - combination_length; i--)
 	{
 		uint64_t y = combination_number / alphabet_length;
-		result *= (1ULL << 8);
+		result *= (1 << 8);
 		result += alphabet[combination_number - y * alphabet_length];
 		combination_number = y;
 	}
