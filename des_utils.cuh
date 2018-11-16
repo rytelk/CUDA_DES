@@ -9,7 +9,7 @@
 
 __host__ __device__ uint64_t create_combination(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t combination_length);
 __host__ __device__ uint64_t get_combinations_count(int alphabet_length, int input_length);
-__host__ __device__ void prepare_data();
+__host__ void prepare_data();
 
 __host__ __device__ uint64_t create_combination(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t combination_length)
 {
