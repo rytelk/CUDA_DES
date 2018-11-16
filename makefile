@@ -1,4 +1,4 @@
-all: *.cpp *.h
-	g++ -w -Wall -Wextra -Werror -o main main.cpp
+all: *.cu *.h
+	nvcc main.cu -o main
 clean:
 	rm -f *.o des-brute-force
