@@ -23,6 +23,9 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
 {
     uint64_t keys_count = get_combinations_count(key_alphabet_length, key_length);
     uint64_t messages_cout = get_combinations_count(message_alphabet_length, message_length);
+    printf("keys_count %d\n", keys_count);
+    printf("messages_cout %d\n", messages_cout);
+
     uint64_t subkeyes[16];
 
     printf("\n--- GPU PARAMS --- \n");
@@ -45,10 +48,9 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
         for (uint64_t j = 0; j < messages_cout; j++)
         {
             uint64_t message = create_combination(j, message_alphabet, message_alphabet_length, message_length);
-            printf("Message %d 0x%016x\n", i, message);
-            //print_hex(message, "Message_" + std::to_string(j));
+            //printf("Message %d 0x%016x\n", i, message);
             uint64_t test_cipher = des_encrypt(message, subkeyes, gpu_IP, gpu_IP_REV, gpu_E_BIT, gpu_P, gpu_S);
-            printf("0x%016x\n", test_cipher);            
+            //printf("0x%016x\n", test_cipher);            
             if (ciphertext == test_cipher)
             {
                 *key_result = key;
