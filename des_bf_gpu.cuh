@@ -27,13 +27,13 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     {
         uint64_t key = create_combination(i, key_alphabet, key_alphabet_length, key_length);
         // print_hex(key, "Key_" + std::to_string(i));
-        create_subkeyes(key, subkeyes, cpu_SHIFTS, cpu_PC_1, cpu_PC_2);
+        create_subkeyes(key, subkeyes, gpu_SHIFTS, gpu_PC_1, gpu_PC_2);
 
         for (uint64_t j = 0; j < messages_cout; j++)
         {
             uint64_t message = create_combination(j, message_alphabet, message_alphabet_length, message_length);
             //print_hex(message, "Message_" + std::to_string(j));
-            if (ciphertext == des_encrypt(message, subkeyes, cpu_IP, cpu_IP_REV, cpu_E_BIT, cpu_P, cpu_S))
+            if (ciphertext == des_encrypt(message, subkeyes, gpu_IP, gpu_IP_REV, gpu_E_BIT, gpu_P, gpu_S))
             {
                 *key_result = key;
                 *message_result = message;
@@ -60,7 +60,6 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     cudaMallocManaged(&message, sizeof(uint64_t));
     cudaMallocManaged(&found_key, sizeof(bool));
 
-    std::chrono::steady_clock::time_point cpu_start, cpu_end;
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     
     gpu_brute_force<<<1, 1>>>(
