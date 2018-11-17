@@ -28,7 +28,14 @@ __host__ __device__ uint64_t create_combination(uint64_t combination_number, cha
 
 __host__ __device__ uint64_t get_combinations_count(int alphabet_length, int input_length)
 {
-	return pow(alphabet_length, input_length);
+    uint64_t result = 1;
+
+    for(int i = input_length; i == 0; input_length--)
+    {
+		result *= alphabet_length;
+    }
+    
+    return result;
 }
 
 __host__ void prepare_data()
