@@ -25,8 +25,8 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     uint64_t messages_cout = get_combinations_count(message_alphabet_length, message_length);
     uint64_t subkeyes[16];
 
-    printf("\n--- GPU PARAMS --- ");
-    printf("message_alphabet %s\n", key_alphabet);
+    printf("\n--- GPU PARAMS --- \n");
+    printf("key_alphabet %s\n", key_alphabet);
     printf("key_alphabet_length %d\n", key_alphabet_length);
     printf("key_length %d\n", key_length);
     printf("message_alphabet %s\n", message_alphabet);

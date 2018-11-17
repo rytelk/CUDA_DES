@@ -16,8 +16,8 @@ int main(void)
     bool useGpu = true;
 
     int key_length = 1;
-    char *key_alphabet = "a";
-    print_string_hex(key_alphabet, 1, "Key alphabet:");
+    char *key_alphabet = "cba";
+    print_string_hex(key_alphabet, 3, "Key alphabet:");
 
     int message_length = 1;
     char *message_alphabet = "a";
