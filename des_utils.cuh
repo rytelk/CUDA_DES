@@ -33,7 +33,7 @@ __host__ __device__ uint64_t get_combinations_count(int alphabet_length, int inp
 
 __host__ void prepare_data()
 {
-    char * key = "ddaac";
+    char * key = "ddaab";
     print_string_hex(key, 5, "Key:");
 
     char * message = "cca";
