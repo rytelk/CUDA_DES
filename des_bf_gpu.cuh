@@ -77,7 +77,7 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     
     if (found_key)
     {
-        print_hex(key, "Found key:");
+        print_hex(*key, "Found key:");
     }
     else
     {
