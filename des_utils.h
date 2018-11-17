@@ -33,17 +33,15 @@ uint64_t get_combinations_count(int alphabet_length, int input_length)
 
 void prepare_data()
 {
-    char * key = "ddaac";
-    int64_t key_hex = 0x6464616163;
-    print_string_hex(key, 5, "Key:");
+    char * key = "a";
+    print_string_hex(key, 1, "Key:");
 
-    char * message = "cca";
-    int64_t message_hex = 0x636361;
-    print_string_hex(message, 3, "Message:");
+    char * message = "a";
+    print_string_hex(message, 1, "Message:");
 
     uint64_t subkeyes[16];
-    create_subkeyes(0x6464616162, subkeyes, cpu_SHIFTS, cpu_PC_1, cpu_PC_2);
+    create_subkeyes(0x61, subkeyes, cpu_SHIFTS, cpu_PC_1, cpu_PC_2);
     
-    uint64_t ciphertext_v = des_encrypt(message_hex, subkeyes, cpu_IP, cpu_IP_REV, cpu_E_BIT, cpu_P, cpu_S);
+    uint64_t ciphertext_v = des_encrypt(0x61, subkeyes, cpu_IP, cpu_IP_REV, cpu_E_BIT, cpu_P, cpu_S);
     print_hex(ciphertext_v, "Ciphertext_hex:");
 }
