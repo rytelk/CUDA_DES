@@ -28,7 +28,7 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
 
     uint64_t subkeyes[16];
 
-    printf("\n--- GPU PARAMS --- \n");
+    printf("\n--- gpu_brute_force params --- \n");
     printf("key_alphabet %s\n", key_alphabet);
     printf("key_alphabet_length %d\n", key_alphabet_length);
     printf("key_length %d\n", key_length);

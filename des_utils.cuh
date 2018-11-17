@@ -29,6 +29,7 @@ __host__ __device__ uint64_t create_combination(uint64_t combination_number, cha
 		combination_number = y;
     }
     
+    printf("result 0x%016x\n", result);
 	return result;
 }
 
