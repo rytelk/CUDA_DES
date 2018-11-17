@@ -7,6 +7,7 @@
 #include "des_constant_cpu.cuh"
 #include "des.cuh"
 #include "des_bf_cpu.cuh"
+#include "des_bf_gpu.cuh"
 
 int main(void)
 {
