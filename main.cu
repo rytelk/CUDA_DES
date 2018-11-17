@@ -11,8 +11,8 @@
 int main(void)
 {
     usage();
-    bool useCpu = true;
-    bool useGpu = false;
+    bool useCpu = false;
+    bool useGpu = true;
 
     int key_length = 5;
     char *key_alphabet = "abcdefgh";
@@ -29,9 +29,9 @@ int main(void)
     {
         des_brute_force_cpu(key_alphabet, key_length, message_alphabet, message_length, ciphertext);
     }
-    else if (useGpu)
+    if (useGpu)
     {
-        // TODO: GPU
+        des_brute_force_gpu(key_alphabet, key_length, message_alphabet, message_length, ciphertext);
     }
 
     return 0;
