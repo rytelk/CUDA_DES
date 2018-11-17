@@ -42,6 +42,8 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
                 *key_result = key;
                 *message_result = message;
                 *found_key = true;
+                printf("KEY FOUND ON THE GPU\n");\
+                printf("0x%08x\n", key);
                 return;
             }
         }
