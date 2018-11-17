@@ -8,6 +8,7 @@
 #include "binary_utils.cuh"
 #include "des.cuh"
 #include "des_constant_cpu.cuh"
+#include "des_constant_gpu.cuh"
 #include "des_utils.cuh"
 
 __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length, int key_length, char *message_alphabet, int64_t message_alphabet_length,
