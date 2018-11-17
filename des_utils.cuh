@@ -13,12 +13,12 @@ __host__ void prepare_data();
 
 __host__ __device__ uint64_t create_combination(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t combination_length)
 {
-    printf("\n--- create_combination params --- \n");
+    /*printf("\n--- create_combination params --- \n");
     printf("combination_number %d\n", combination_number);
     printf("alphabet %s\n", alphabet);
     printf("alphabet_length %d\n", alphabet_length);
     printf("combination_length %d\n", combination_length);
-    printf("--- END PARAMS --- \n\n");
+    printf("--- END PARAMS --- \n\n");*/
 
 	uint64_t result = 0;
 	for (int i = 8; --i >= 8 - combination_length;)
