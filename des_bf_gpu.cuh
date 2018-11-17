@@ -41,7 +41,7 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     for (uint64_t i = 0; i < keys_count; i++)
     {
         uint64_t key = create_combination(i, key_alphabet, key_alphabet_length, key_length);
-        printf("Key %d 0x%016x\n", i, key);
+        printf("Key 0x%016x\n", result);
         //print_hex(key, "Key_" + std::to_string(i));
         create_subkeyes(key, subkeyes, gpu_SHIFTS, gpu_PC_1, gpu_PC_2);
 
