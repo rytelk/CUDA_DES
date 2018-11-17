@@ -62,8 +62,18 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
 
     std::chrono::steady_clock::time_point cpu_start, cpu_end;
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-    gpu_brute_force<<1, 1>>(key_alphabet, key_alphabet_length, key_length, message_alphabet, message_alphabet_length,
-        message_length, ciphertext, message, key, found_key);
+    
+    gpu_brute_force<<1, 1>>(
+        key_alphabet, 
+        key_alphabet_length, 
+        key_length, 
+        message_alphabet, 
+        message_alphabet_length,
+        message_length, 
+        ciphertext, 
+        message, 
+        key, 
+        found_key);
 
     cudaDeviceSynchronize();
     cudaFree(key_alphabet);
