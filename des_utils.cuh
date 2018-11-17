@@ -30,7 +30,7 @@ __host__ __device__ uint64_t get_combinations_count(int alphabet_length, int inp
 {
     uint64_t result = 1;
 
-    for(int i = input_length; i == 0; i--)
+    while(input_length--)
     {
 		result *= alphabet_length;
     }
