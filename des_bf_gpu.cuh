@@ -26,6 +26,10 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     uint64_t subkeyes[16];
     printf("key_alphabet_length %d\n", key_alphabet_length);
     printf("key_length %d\n", key_length);
+    printf("message_alphabet %s\n", message_alphabet);
+    printf("message_alphabet_length %d\n", message_alphabet_length);
+    printf("message_length %d\n", message_length);
+    printf("ciphertext 0x%016x\n", ciphertext);
 
     for (uint64_t i = 0; i < keys_count; i++)
     {
@@ -74,12 +78,12 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     cudaError_t cudaStatus1 = cudaMemcpy(gpu_key_alphabet, key_alphabet, key_alphabet_length, cudaMemcpyHostToDevice)
     cudaError_t cudaStatus2 = cudaMemcpy(gpu_message_alphabet, message_alphabet, message_alphabet_length, cudaMemcpyHostToDevice)
 
-    if (cudaStatus1 == cudaSuccess) {
-		printf("OK memCpy\n");
+    if (cudaStatus1 != cudaSuccess) {
+		printf("%s\n", cudaGetErrorString(cudaStatus1));
     }
     
-    if (cudaStatus2 == cudaSuccess) {
-		printf("OK memCpy\n");
+    if (cudaStatus2 != cudaSuccess) {
+		printf("%s\n", cudaGetErrorString(cudaStatus2));
 	}
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
