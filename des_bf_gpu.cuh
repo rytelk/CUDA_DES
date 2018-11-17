@@ -27,7 +27,7 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     for (uint64_t i = 0; i < keys_count; i++)
     {
         uint64_t key = create_combination(i, key_alphabet, key_alphabet_length, key_length);
-        // print_hex(key, "Key_" + std::to_string(i));
+        print_hex(key, "Key_" + std::to_string(i));
         create_subkeyes(key, subkeyes, gpu_SHIFTS, gpu_PC_1, gpu_PC_2);
 
         for (uint64_t j = 0; j < messages_cout; j++)
@@ -38,6 +38,7 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
             {
                 *key_result = key;
                 *message_result = message;
+                cout << "KEY FOUND BY GPU :)" << endl;
                 *found_key = true;
                 return;
             }
