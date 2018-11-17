@@ -75,8 +75,16 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     cudaMallocManaged(&message, sizeof(uint64_t));
     cudaMallocManaged(&found_key, sizeof(bool));
 
-    cudaMemcpy(gpu_key_alphabet, key_alphabet, key_alphabet_length, cudaMemcpyHostToDevice)
-    cudaMemcpy(gpu_message_alphabet, message_alphabet, message_alphabet_length, cudaMemcpyHostToDevice)
+    cudaError_t cudaStatus1 = cudaMemcpy(gpu_key_alphabet, key_alphabet, key_alphabet_length, cudaMemcpyHostToDevice)
+    cudaError_t cudaStatus2 = cudaMemcpy(gpu_message_alphabet, message_alphabet, message_alphabet_length, cudaMemcpyHostToDevice)
+
+    if (cudaStatus1 != cudaSuccess) {
+		printf("%s\n", cudaGetErrorString(cudaStatus1));
+    }
+    
+    if (cudaStatus2 != cudaSuccess) {
+		printf("%s\n", cudaGetErrorString(cudaStatus2));
+	}
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     
