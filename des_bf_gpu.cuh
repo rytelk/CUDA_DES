@@ -23,12 +23,12 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
 {
     uint64_t keys_count = get_combinations_count(key_alphabet_length, key_length);
     uint64_t messages_cout = get_combinations_count(message_alphabet_length, message_length);
-    printf("keys_count %d\n", keys_count);
-    printf("messages_cout %d\n", messages_cout);
+    //printf("keys_count %d\n", keys_count);
+    //printf("messages_cout %d\n", messages_cout);
 
     uint64_t subkeyes[16];
 
-    printf("\n--- gpu_brute_force params --- \n");
+    /*printf("\n--- gpu_brute_force params --- \n");
     printf("key_alphabet %s\n", key_alphabet);
     printf("key_alphabet_length %d\n", key_alphabet_length);
     printf("key_length %d\n", key_length);
@@ -36,12 +36,12 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     printf("message_alphabet_length %d\n", message_alphabet_length);
     printf("message_length %d\n", message_length);
     printf("ciphertext 0x%016x\n", ciphertext);
-    printf("--- END PARAMS --- \n\n");
+    printf("--- END PARAMS --- \n\n");*/
 
     for (uint64_t i = 0; i < keys_count; i++)
     {
         uint64_t key = create_combination(i, key_alphabet, key_alphabet_length, key_length);
-        printf("Key 0x%016x\n", key);
+        //printf("Key 0x%016x\n", key);
         //print_hex(key, "Key_" + std::to_string(i));
         create_subkeyes(key, subkeyes, gpu_SHIFTS, gpu_PC_1, gpu_PC_2);
 
@@ -83,14 +83,6 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
 
     cudaError_t cudaStatus1 = cudaMemcpy(gpu_key_alphabet, key_alphabet, key_alphabet_length, cudaMemcpyHostToDevice);
     cudaError_t cudaStatus2 = cudaMemcpy(gpu_message_alphabet, message_alphabet, message_alphabet_length, cudaMemcpyHostToDevice);
-
-    if (cudaStatus1 != cudaSuccess) {
-		printf("%s\n", cudaGetErrorString(cudaStatus1));
-    }
-    
-    if (cudaStatus2 != cudaSuccess) {
-		printf("%s\n", cudaGetErrorString(cudaStatus2));
-	}
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     
