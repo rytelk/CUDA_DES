@@ -11,16 +11,16 @@
 #include "des_utils.cuh"
 
 __device__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length, int key_length, char *message_alphabet, int64_t message_alphabet_length,
-     uint64_t ciphertext);
+    int message_length, uint64_t ciphertext, uint64_t *message_result, uint64_t *key_result, bool *found_key);
     
 __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *message_alphabet, int message_length, uint64_t ciphertext);
 
 
 __device__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length, int key_length, char *message_alphabet, int64_t message_alphabet_length,
-                      uint64_t ciphertext)
+                     int message_length, uint64_t ciphertext, uint64_t *message_result, uint64_t *key_result, bool *found_key)
 {
     uint64_t keys_count = get_combinations_count(key_alphabet_length, key_length);
-    uint64_t messages_cout = get_combinations_count(message_alphabet_length, 3);
+    uint64_t messages_cout = get_combinations_count(message_alphabet_length, message_length);
     uint64_t subkeyes[16];
 
     for (uint64_t i = 0; i < keys_count; i++)
@@ -31,10 +31,13 @@ __device__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
 
         for (uint64_t j = 0; j < messages_cout; j++)
         {
-            uint64_t message = create_combination(j, message_alphabet, message_alphabet_length, 3);
+            uint64_t message = create_combination(j, message_alphabet, message_alphabet_length, message_length);
             //print_hex(message, "Message_" + std::to_string(j));
             if (ciphertext == des_encrypt(message, subkeyes, cpu_IP, cpu_IP_REV, cpu_E_BIT, cpu_P, cpu_S))
             {
+                *key_result = key;
+                *message_result = message;
+                *found_key = true;
                 return;
             }
         }
@@ -60,7 +63,7 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     std::chrono::steady_clock::time_point cpu_start, cpu_end;
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     gpu_brute_force<<1, 1>>(key_alphabet, key_alphabet_length, key_length, message_alphabet, message_alphabet_length,
-        ciphertext);
+        message_length, ciphertext, message, key, found_key);
 
     cudaDeviceSynchronize();
     cudaFree(key_alphabet);
