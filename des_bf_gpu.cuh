@@ -73,6 +73,9 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     cudaMallocManaged(&message, sizeof(uint64_t));
     cudaMallocManaged(&found_key, sizeof(bool));
 
+    message_alphabet = "a";
+    key_alphabet = "a";
+
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     
     gpu_brute_force<<<1, 1>>>(
