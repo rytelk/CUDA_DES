@@ -10,14 +10,14 @@
 #include "des_constant_cpu.cuh"
 #include "des_utils.cuh"
 
-__device__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length, int key_length, char *message_alphabet, int64_t message_alphabet_length,
-    int message_length, uint64_t ciphertext, uint64_t *message_result, uint64_t *key_result, bool *found_key);
+__device__ void gpu_brute_force(char *key_alphabet, uint64_t key_alphabet_length, uint32_t key_length, char *message_alphabet, uint64_t message_alphabet_length,
+    uint32_t message_length, uint64_t ciphertext, uint64_t *message_result, uint64_t *key_result, bool *found_key);
     
 __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *message_alphabet, int message_length, uint64_t ciphertext);
 
 
-__device__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length, int key_length, char *message_alphabet, int64_t message_alphabet_length,
-                     int message_length, uint64_t ciphertext, uint64_t *message_result, uint64_t *key_result, bool *found_key)
+__device__ void gpu_brute_force(char *key_alphabet, uint64_t key_alphabet_length, uint32_t key_length, char *message_alphabet, uint64_t message_alphabet_length,
+    uint32_t message_length, uint64_t ciphertext, uint64_t *message_result, uint64_t *key_result, bool *found_key)
 {
     uint64_t keys_count = get_combinations_count(key_alphabet_length, key_length);
     uint64_t messages_cout = get_combinations_count(message_alphabet_length, message_length);
@@ -51,8 +51,8 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     uint64_t *message;
     bool *found_key;
 
-    int64_t key_alphabet_length = (int64_t)std::strlen(key_alphabet);
-    int64_t message_alphabet_length = (int64_t)std::strlen(message_alphabet);
+    uint64_t key_alphabet_length = (uint64_t)std::strlen(key_alphabet);
+    uint64_t message_alphabet_length = (uint64_t)std::strlen(message_alphabet);
 
     cudaMallocManaged(&key_alphabet, key_alphabet_length*sizeof(char));
     cudaMallocManaged(&message_alphabet, message_alphabet_length*sizeof(char));
