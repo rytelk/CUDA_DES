@@ -37,7 +37,7 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
             uint64_t message = create_combination(j, message_alphabet, message_alphabet_length, message_length);
             printf("Message %d 0x%016x\n", i, message);
             //print_hex(message, "Message_" + std::to_string(j));
-            uint64_t test_cipher = des_encrypt(message, subkeyes, gpu_IP, gpu_IP_REV, gpu_E_BIT, gpu_P, gpu_S)
+            uint64_t test_cipher = des_encrypt(message, subkeyes, gpu_IP, gpu_IP_REV, gpu_E_BIT, gpu_P, gpu_S);
             printf("0x%016x\n", test_cipher);            
             if (ciphertext == test_cipher)
             {
