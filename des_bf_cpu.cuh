@@ -28,6 +28,7 @@ __host__ bool cpu_brute_force(char *key_alphabet, int key_length, char *message_
     {
         uint64_t key = create_combination(i, key_alphabet, key_alphabet_length, key_length);
         // print_hex(key, "Key_" + std::to_string(i));
+        printf("Key %d 0x%016x\n", i, key);
         create_subkeyes(key, subkeyes, cpu_SHIFTS, cpu_PC_1, cpu_PC_2);
 
         for (uint64_t j = 0; j < messages_cout; j++)
