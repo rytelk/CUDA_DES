@@ -24,12 +24,15 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     uint64_t keys_count = get_combinations_count(key_alphabet_length, key_length);
     uint64_t messages_cout = get_combinations_count(message_alphabet_length, message_length);
     uint64_t subkeyes[16];
+    prtinf("\n--- GPU PARAMS --- ");
+    printf("message_alphabet %s\n", key_alphabet);
     printf("key_alphabet_length %d\n", key_alphabet_length);
     printf("key_length %d\n", key_length);
     printf("message_alphabet %s\n", message_alphabet);
     printf("message_alphabet_length %d\n", message_alphabet_length);
     printf("message_length %d\n", message_length);
     printf("ciphertext 0x%016x\n", ciphertext);
+    printf("--- END PARAMS --- \n\n");
 
     for (uint64_t i = 0; i < keys_count; i++)
     {
@@ -50,7 +53,7 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
                 *key_result = key;
                 *message_result = message;
                 *found_key = true;
-                printf("KEY FOUND ON THE GPU\n");\
+                printf("Key found GPU\n");\
                 return;
             }
         }
