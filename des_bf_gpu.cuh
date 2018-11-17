@@ -67,20 +67,22 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     int64_t key_alphabet_length = (int64_t)std::strlen(key_alphabet);
     int64_t message_alphabet_length = (int64_t)std::strlen(message_alphabet);
 
-    cudaMallocManaged(&key_alphabet, key_alphabet_length*sizeof(char));
-    cudaMallocManaged(&message_alphabet, message_alphabet_length*sizeof(char));
+    char *gpu_key_alphabet, *gpu_message_alphabet;
+     
+    cudaMallocManaged(&gpu_key_alphabet, key_alphabet_length*sizeof(char));
+    cudaMallocManaged(&gpu_message_alphabet, message_alphabet_length*sizeof(char));
     cudaMallocManaged(&key, sizeof(uint64_t));
     cudaMallocManaged(&message, sizeof(uint64_t));
     cudaMallocManaged(&found_key, sizeof(bool));
 
-    message_alphabet = "a";
-    key_alphabet = "a";
+    cudaMemcpy(gpu_key_alphabet, key_alphabet, key_alphabet_length, cudaMemcpyHostToDevice)
+    cudaMemcpy(gpu_message_alphabet, message_alphabet, message_alphabet_length, cudaMemcpyHostToDevice)
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     
     gpu_brute_force<<<1, 1>>>(
-        key_alphabet, 
-        key_alphabet_length, 
+        gpu_key_alphabet, 
+        gpu_message_alphabet, 
         key_length, 
         message_alphabet, 
         message_alphabet_length,
