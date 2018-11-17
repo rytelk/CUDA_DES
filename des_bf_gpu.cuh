@@ -21,7 +21,6 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
 __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length, int key_length, char *message_alphabet, int64_t message_alphabet_length,
                      int message_length, uint64_t ciphertext, uint64_t *message_result, uint64_t *key_result, bool *found_key)
 {
-    printf("Hello from KERNEL");
     uint64_t keys_count = get_combinations_count(key_alphabet_length, key_length);
     uint64_t messages_cout = get_combinations_count(message_alphabet_length, message_length);
     uint64_t subkeyes[16];
@@ -29,21 +28,23 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     for (uint64_t i = 0; i < keys_count; i++)
     {
         uint64_t key = create_combination(i, key_alphabet, key_alphabet_length, key_length);
+        printf("Key %d 0x%016x\n", i, key);
         //print_hex(key, "Key_" + std::to_string(i));
         create_subkeyes(key, subkeyes, gpu_SHIFTS, gpu_PC_1, gpu_PC_2);
-        printf("Hello from block %d, thread %d\n", blockIdx.x, threadIdx.x);
 
         for (uint64_t j = 0; j < messages_cout; j++)
         {
             uint64_t message = create_combination(j, message_alphabet, message_alphabet_length, message_length);
+            printf("Message %d 0x%016x\n", i, message);
             //print_hex(message, "Message_" + std::to_string(j));
-            if (ciphertext == des_encrypt(message, subkeyes, gpu_IP, gpu_IP_REV, gpu_E_BIT, gpu_P, gpu_S))
+            uint64_t test_cipher = des_encrypt(message, subkeyes, gpu_IP, gpu_IP_REV, gpu_E_BIT, gpu_P, gpu_S)
+            printf("0x%016x\n", test_cipher);            
+            if (ciphertext == test_cipher)
             {
                 *key_result = key;
                 *message_result = message;
                 *found_key = true;
                 printf("KEY FOUND ON THE GPU\n");\
-                printf("0x%08x\n", key);
                 return;
             }
         }
