@@ -90,9 +90,9 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     
     gpu_brute_force<<<1, 1>>>(
         gpu_key_alphabet, 
-        gpu_message_alphabet, 
+        key_alphabet_length, 
         key_length, 
-        message_alphabet, 
+        gpu_message_alphabet, 
         message_alphabet_length,
         message_length, 
         ciphertext, 
