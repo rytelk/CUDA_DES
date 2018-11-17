@@ -21,6 +21,7 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
 __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length, int key_length, char *message_alphabet, int64_t message_alphabet_length,
                      int message_length, uint64_t ciphertext, uint64_t *message_result, uint64_t *key_result, bool *found_key)
 {
+    printf("Hello from KERNEL");
     uint64_t keys_count = get_combinations_count(key_alphabet_length, key_length);
     uint64_t messages_cout = get_combinations_count(message_alphabet_length, message_length);
     uint64_t subkeyes[16];
