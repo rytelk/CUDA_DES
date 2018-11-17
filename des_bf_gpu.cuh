@@ -64,7 +64,7 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     std::chrono::steady_clock::time_point cpu_start, cpu_end;
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     gpu_brute_force<<1, 1>>(key_alphabet, key_alphabet_length, key_length, message_alphabet, message_alphabet_length,
-        message_length, ciphertext, message, key, found_key)
+        message_length, ciphertext, message, key, found_key);
 
     cudaDeviceSynchronize();
     cudaFree(key_alphabet);
@@ -86,7 +86,7 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
 
     std::cout << "Time elapsed:" << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << std::endl;
 
-    if(verify(key, message, ciphertext, cpu_IP, cpu_IP_REV, cpu_E_BIT, cpu_P, cpu_S, cpu_SHIFTS, cpu_PC_1, cpu_PC_2))
+    if(verify(*key, *message, ciphertext, cpu_IP, cpu_IP_REV, cpu_E_BIT, cpu_P, cpu_S, cpu_SHIFTS, cpu_PC_1, cpu_PC_2))
     {
         std::cout << "Verified OK." << std::endl;
     }

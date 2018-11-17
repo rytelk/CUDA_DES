@@ -99,7 +99,7 @@ __host__ __device__ uint64_t des_encrypt(uint64_t message, uint64_t *subkeyes, i
     return encrypted;
 }
 
-__host__ __device__ bool verify(uint64_t key, uint64_t message, uint64_t ciphertext, int *IP, int *IP_REV, int *E_BIT, int *P, int **S, int *SHIFTS, int *PC_1, int *PC_2)
+__host__ bool verify(uint64_t key, uint64_t message, uint64_t ciphertext, int *IP, int *IP_REV, int *E_BIT, int *P, int **S, int *SHIFTS, int *PC_1, int *PC_2)
 {
     uint64_t subkeyes[16];
     create_subkeyes(key, subkeyes, SHIFTS, PC_1, PC_2);
