@@ -24,8 +24,8 @@ __host__ __device__ uint64_t create_combination(uint64_t combination_number, cha
 	for (int i = 8; --i >= 8 - combination_length;)
 	{
 		uint64_t y = combination_number / alphabet_length;
-		acc *= (1ULL << 8);
-		acc += alphabet[combination_number - y * alphabet_length];
+		result *= (1ULL << 8);
+		result += alphabet[combination_number - y * alphabet_length];
 		combination_number = y;
     }
     
