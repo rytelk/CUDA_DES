@@ -23,7 +23,7 @@ int main(void)
     char *message_alphabet = "a";
     print_string_hex(message_alphabet, 1, "Message alphabet:");
 
-    uint64_t ciphertext = 0x4e846faf32794862;
+    uint64_t ciphertext = 0x3cd4addba4f25394;
     print_hex(ciphertext, "Ciphertext_hex:");
 
     if (useCpu)
