@@ -36,8 +36,8 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     printf("ciphertext 0x%016x\n", ciphertext);
     printf("--- END PARAMS --- \n\n");*/
 
-    int index = threadIdx.x;
-    int stride = blockDim.x;
+    int index = blockIdx.x * blockDim.x + threadIdx.x;
+    int stride = blockDim.x * gridDim.x;
 
     uint64_t subkeyes[16];
     for (uint64_t i = index; i < keys_count; i += stride)
@@ -86,9 +86,7 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     cudaError_t cudaStatus1 = cudaMemcpy(gpu_key_alphabet, key_alphabet, key_alphabet_length, cudaMemcpyHostToDevice);
     cudaError_t cudaStatus2 = cudaMemcpy(gpu_message_alphabet, message_alphabet, message_alphabet_length, cudaMemcpyHostToDevice);
 
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-    
-    gpu_brute_force<<<1, 256>>>(
+    gpu_brute_force<<<4096, 512>>>(
         gpu_key_alphabet, 
         key_alphabet_length, 
         key_length, 
@@ -102,7 +100,6 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
 
     cudaDeviceSynchronize();
   
-    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     
     if (*found_key)
     {
@@ -113,7 +110,6 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
         std::cout << "Key was not found" << std::endl;
     }
 
-    std::cout << "Time elapsed:" << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << std::endl;
 
     if(verify(*key, *message, ciphertext, cpu_IP, cpu_IP_REV, cpu_E_BIT, cpu_P, cpu_S, cpu_SHIFTS, cpu_PC_1, cpu_PC_2))
     {
