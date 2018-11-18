@@ -26,8 +26,6 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     //printf("keys_count %d\n", keys_count);
     //printf("messages_cout %d\n", messages_cout);
 
-    uint64_t subkeyes[16];
-
     /*printf("\n--- gpu_brute_force params --- \n");
     printf("key_alphabet %s\n", key_alphabet);
     printf("key_alphabet_length %d\n", key_alphabet_length);
@@ -38,7 +36,11 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     printf("ciphertext 0x%016x\n", ciphertext);
     printf("--- END PARAMS --- \n\n");*/
 
-    for (uint64_t i = 0; i < keys_count; i++)
+    int index = threadIdx.x;
+    int stride = blockDim.x;
+
+    uint64_t subkeyes[16];
+    for (uint64_t i = index; i < keys_count; i += stride)
     {
         uint64_t key = create_combination(i, key_alphabet, key_alphabet_length, key_length);
         //printf("Key 0x%016x\n", key);
@@ -86,7 +88,7 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     
-    gpu_brute_force<<<1, 1>>>(
+    gpu_brute_force<<<1, 256>>>(
         gpu_key_alphabet, 
         key_alphabet_length, 
         key_length, 
