@@ -40,14 +40,14 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     int stride = blockDim.x * gridDim.x;
 
     uint64_t subkeyes[16];
-    for (uint64_t i = index; i < keys_count || *found_key; i += stride)
+    for (uint64_t i = index; i < keys_count && !(*found_key); i += stride)
     {
         uint64_t key = create_combination(i, key_alphabet, key_alphabet_length, key_length);
         //printf("Key 0x%016x\n", key);
         //print_hex(key, "Key_" + std::to_string(i));
         create_subkeyes(key, subkeyes, gpu_SHIFTS, gpu_PC_1, gpu_PC_2);
 
-        for (uint64_t j = 0; j < messages_cout || *found_key; j++)
+        for (uint64_t j = 0; j < messages_cout && !(*found_key); j++)
         {
             uint64_t message = create_combination(j, message_alphabet, message_alphabet_length, message_length);
             //printf("Message %d 0x%016x\n", i, message);
