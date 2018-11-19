@@ -16,7 +16,7 @@ int main(void)
     bool useGpu = true;
 
     int key_length = 5;
-    char *key_alphabet = "abcdefghmnoprst";
+    char *key_alphabet = "abcdefghmnop";
     print_string_hex(key_alphabet, 5, "Key alphabet:");
 
     int message_length = 3;

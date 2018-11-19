@@ -23,9 +23,6 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
 {
     uint64_t keys_count = get_combinations_count(key_alphabet_length, key_length);
     uint64_t messages_cout = get_combinations_count(message_alphabet_length, message_length);
-    //printf("keys_count %d\n", keys_count);
-    //printf("messages_cout %d\n", messages_cout);
-
     /*printf("\n--- gpu_brute_force params --- \n");
     printf("key_alphabet %s\n", key_alphabet);
     printf("key_alphabet_length %d\n", key_alphabet_length);
@@ -34,20 +31,23 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
     printf("message_alphabet_length %d\n", message_alphabet_length);
     printf("message_length %d\n", message_length);
     printf("ciphertext 0x%016x\n", ciphertext);
+    //printf("keys_count %d\n", keys_count);
+    //printf("messages_cout %d\n", messages_cout);
+
     printf("--- END PARAMS --- \n\n");*/
 
     int index = blockIdx.x * blockDim.x + threadIdx.x;
     int stride = blockDim.x * gridDim.x;
 
     uint64_t subkeyes[16];
-    for (uint64_t i = index; i < keys_count; i += stride)
+    for (uint64_t i = index; i < keys_count || *found_key; i += stride)
     {
         uint64_t key = create_combination(i, key_alphabet, key_alphabet_length, key_length);
         //printf("Key 0x%016x\n", key);
         //print_hex(key, "Key_" + std::to_string(i));
         create_subkeyes(key, subkeyes, gpu_SHIFTS, gpu_PC_1, gpu_PC_2);
 
-        for (uint64_t j = 0; j < messages_cout; j++)
+        for (uint64_t j = 0; j < messages_cout || *found_key; j++)
         {
             uint64_t message = create_combination(j, message_alphabet, message_alphabet_length, message_length);
             //printf("Message %d 0x%016x\n", i, message);
@@ -104,6 +104,7 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     if (*found_key)
     {
         print_hex(*key, "Found key:");
+        print_hex(*message, "Found message:");
     }
     else
     {
