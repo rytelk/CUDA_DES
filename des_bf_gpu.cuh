@@ -66,7 +66,7 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
 
 __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *message_alphabet, int message_length, uint64_t ciphertext)
 {
-    std::cout << "\nDES GPU" << std::endl;
+    std::cout << "\nDES GPU" << std::endl;    
     uint64_t *key;
     uint64_t *message;
     bool *found_key;
@@ -82,8 +82,14 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     cudaMallocManaged(&message, sizeof(uint64_t));
     cudaMallocManaged(&found_key, sizeof(bool));
 
-    cudaError_t cudaStatus1 = cudaMemcpy(gpu_key_alphabet, key_alphabet, key_alphabet_length, cudaMemcpyHostToDevice);
-    cudaError_t cudaStatus2 = cudaMemcpy(gpu_message_alphabet, message_alphabet, message_alphabet_length, cudaMemcpyHostToDevice);
+    cudaMemcpy(gpu_key_alphabet, key_alphabet, key_alphabet_length, cudaMemcpyHostToDevice);
+    cudaMemcpy(gpu_message_alphabet, message_alphabet, message_alphabet_length, cudaMemcpyHostToDevice);
+
+    cudaEvent_t start, stop;
+    float elapsedTime;
+  
+    cudaEventCreate(&start);
+    cudaEventRecord(start,0);
 
     gpu_brute_force<<<4096, 512>>>(
         gpu_key_alphabet, 
@@ -99,6 +105,12 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
 
     cudaDeviceSynchronize();
   
+    cudaEventCreate(&stop);
+    cudaEventRecord(stop,0);
+    cudaEventSynchronize(stop);
+
+    cudaEventElapsedTime(&elapsedTime, start,stop);
+    printf("Time elapsed: %f ms\n" ,elapsedTime);
     
     if (*found_key)
     {

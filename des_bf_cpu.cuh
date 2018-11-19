@@ -49,7 +49,7 @@ __host__ bool cpu_brute_force(char *key_alphabet, int key_length, char *message_
 
 __host__ void des_brute_force_cpu(char *key_alphabet, int key_length, char *message_alphabet, int message_length, uint64_t ciphertext)
 {
-    std::cout << "DES CPU" << std::endl;
+    std::cout << "\nDES CPU" << std::endl;
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     uint64_t key, message;
@@ -66,7 +66,7 @@ __host__ void des_brute_force_cpu(char *key_alphabet, int key_length, char *mess
         std::cout << "Key was not found" << std::endl;
     }
 
-    std::cout << "Time elapsed:" << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << std::endl;
+    std::cout << "Time elapsed:" << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << " s" << std::endl;
 
     if(verify(key, message, ciphertext, cpu_IP, cpu_IP_REV, cpu_E_BIT, cpu_P, cpu_S, cpu_SHIFTS, cpu_PC_1, cpu_PC_2))
     {
