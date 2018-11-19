@@ -42,14 +42,14 @@ int main(void)
     print_hex(ciphertext, "Ciphertext_hex:");
     */
 
-    if (useCpu)
+    /*if (useCpu)
     {
         des_brute_force_cpu(key_alphabet, key_length, message_alphabet, message_length, ciphertext);
     }
     if (useGpu)
     {
         des_brute_force_gpu(key_alphabet, key_length, message_alphabet, message_length, ciphertext);
-    }
+    }*/
 
     return 0;
 }
