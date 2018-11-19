@@ -16,8 +16,6 @@ int main(void)
     bool useCpu = true;
     bool useGpu = true;
 
-    prepare_data();
-    /*
     int key_length = 5;
     char *key_alphabet = "qadwczd";
     print_string_hex(key_alphabet, 5, "Key alphabet:");
@@ -26,9 +24,9 @@ int main(void)
     char *message_alphabet = "kpmqaz";
     print_string_hex(message_alphabet, 6, "Message alphabet:");
 
-    uint64_t ciphertext = 0x54ac94e462856bcb;
+    uint64_t ciphertext = 0xc5697270d51e09a4;
     print_hex(ciphertext, "Ciphertext_hex:");
-    */
+    
     /*
     int key_length = 5;
     char *key_alphabet = "abcdefghmnop";
@@ -42,14 +40,14 @@ int main(void)
     print_hex(ciphertext, "Ciphertext_hex:");
     */
 
-    /*if (useCpu)
+    if (useCpu)
     {
         des_brute_force_cpu(key_alphabet, key_length, message_alphabet, message_length, ciphertext);
     }
     if (useGpu)
     {
         des_brute_force_gpu(key_alphabet, key_length, message_alphabet, message_length, ciphertext);
-    }*/
+    }
 
     return 0;
 }
