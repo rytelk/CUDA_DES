@@ -17,12 +17,12 @@ int main(void)
     bool useGpu = true;
 
     int key_length = 5;
-    char *key_alphabet = "qadwczb";
+    char *key_alphabet = "qadwczd";
     print_string_hex(key_alphabet, 5, "Key alphabet:");
 
     int message_length = 4;
     char *message_alphabet = "kpmqaz";
-    print_string_hex(message_alphabet, 3, "Message alphabet:");
+    print_string_hex(message_alphabet, 6, "Message alphabet:");
 
     uint64_t ciphertext = 0x54ac94e462856bcb;
     print_hex(ciphertext, "Ciphertext_hex:");
