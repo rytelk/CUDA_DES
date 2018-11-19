@@ -50,12 +50,12 @@ __host__ void prepare_data()
     print_string_hex(key, 5, "Key:");
 
     char * message = "qazq";
-    int64_t message_hex = 0x636361;
+    int64_t message_hex = 0x71617a;
     print_string_hex(message, 3, "Message:");
 
     uint64_t subkeyes[16];
-    //create_subkeyes(0x6464616162, subkeyes, cpu_SHIFTS, cpu_PC_1, cpu_PC_2);
+    create_subkeyes(0x7763647161, subkeyes, cpu_SHIFTS, cpu_PC_1, cpu_PC_2);
     
     uint64_t ciphertext_v = des_encrypt(message_hex, subkeyes, cpu_IP, cpu_IP_REV, cpu_E_BIT, cpu_P, cpu_S);
-    //print_hex(ciphertext_v, "Ciphertext_hex:");
+    print_hex(ciphertext_v, "Ciphertext_hex:");
 }
