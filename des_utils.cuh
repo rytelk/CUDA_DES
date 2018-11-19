@@ -46,16 +46,16 @@ __host__ __device__ uint64_t get_combinations_count(int alphabet_length, int inp
 
 __host__ void prepare_data()
 {
-    char * key = "ddaab";
+    char * key = "wcdqa";
     print_string_hex(key, 5, "Key:");
 
-    char * message = "cca";
+    char * message = "qazq";
     int64_t message_hex = 0x636361;
     print_string_hex(message, 3, "Message:");
 
     uint64_t subkeyes[16];
-    create_subkeyes(0x6464616162, subkeyes, cpu_SHIFTS, cpu_PC_1, cpu_PC_2);
+    //create_subkeyes(0x6464616162, subkeyes, cpu_SHIFTS, cpu_PC_1, cpu_PC_2);
     
     uint64_t ciphertext_v = des_encrypt(message_hex, subkeyes, cpu_IP, cpu_IP_REV, cpu_E_BIT, cpu_P, cpu_S);
-    print_hex(ciphertext_v, "Ciphertext_hex:");
+    //print_hex(ciphertext_v, "Ciphertext_hex:");
 }

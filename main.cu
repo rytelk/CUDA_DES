@@ -6,6 +6,7 @@
 #include "binary_utils.cuh"
 #include "des_constant_cpu.cuh"
 #include "des.cuh"
+#include "des_utils.cuh"
 #include "des_bf_cpu.cuh"
 #include "des_bf_gpu.cuh"
 
@@ -15,6 +16,8 @@ int main(void)
     bool useCpu = true;
     bool useGpu = true;
 
+    prepare_data();
+    /*
     int key_length = 5;
     char *key_alphabet = "abcdefghmnop";
     print_string_hex(key_alphabet, 5, "Key alphabet:");
@@ -33,7 +36,7 @@ int main(void)
     if (useGpu)
     {
         des_brute_force_gpu(key_alphabet, key_length, message_alphabet, message_length, ciphertext);
-    }
+    }*/
 
     return 0;
 }

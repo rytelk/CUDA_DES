@@ -59,6 +59,7 @@ __host__ void des_brute_force_cpu(char *key_alphabet, int key_length, char *mess
     if (found_key)
     {
         print_hex(key, "Found key:");
+        print_hex(message, "Found message:");
     }
     else
     {

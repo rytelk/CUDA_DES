@@ -58,7 +58,6 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
                 *key_result = key;
                 *message_result = message;
                 *found_key = true;
-                printf("Key found GPU\n");\
                 return;
             }
         }
@@ -67,7 +66,7 @@ __global__ void gpu_brute_force(char *key_alphabet, int64_t key_alphabet_length,
 
 __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *message_alphabet, int message_length, uint64_t ciphertext)
 {
-    std::cout << "DES GPU" << std::endl;
+    std::cout << "\nDES GPU" << std::endl;
     uint64_t *key;
     uint64_t *message;
     bool *found_key;
