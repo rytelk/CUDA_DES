@@ -128,7 +128,7 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     }
     else
     {
-        std::cout << "Not verified" << std:endl;
+        std::cout << "Not verified" << std::endl;
     }
 
     cudaFree(key_alphabet);
