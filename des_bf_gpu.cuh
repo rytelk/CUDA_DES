@@ -70,7 +70,7 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     uint64_t *key;
     uint64_t *message;
     bool *found_key;
-
+    
     int64_t key_alphabet_length = (int64_t)std::strlen(key_alphabet);
     int64_t message_alphabet_length = (int64_t)std::strlen(message_alphabet);
 
@@ -81,6 +81,8 @@ __host__ void des_brute_force_gpu(char *key_alphabet, int key_length, char *mess
     cudaMallocManaged(&key, sizeof(uint64_t));
     cudaMallocManaged(&message, sizeof(uint64_t));
     cudaMallocManaged(&found_key, sizeof(bool));
+
+    *found_key = true;
 
     cudaMemcpy(gpu_key_alphabet, key_alphabet, key_alphabet_length, cudaMemcpyHostToDevice);
     cudaMemcpy(gpu_message_alphabet, message_alphabet, message_alphabet_length, cudaMemcpyHostToDevice);
