@@ -13,7 +13,7 @@
 int main(void)
 {
     usage();
-    bool useCpu = true;
+    bool useCpu = false;
     bool useGpu = true;
 
     int key_length = 5;
