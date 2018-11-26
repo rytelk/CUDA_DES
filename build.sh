@@ -2,4 +2,3 @@
 
 git pull
 make all
-./main

@@ -12,33 +12,26 @@
 
 int main(void)
 {
-    usage();
+    int key_length;
+    char *key_alphabet;
+    int message_length;
+    char *message_alphabet;
+    uint64_t ciphertext;
     bool useCpu = false;
-    bool useGpu = true;
+    bool useGpu = false;
 
-    int key_length = 5;
-    char *key_alphabet = "qadwczd";
-    print_string_hex(key_alphabet, 5, "Key alphabet:");
+    get_parameters(argc, argv, &ciphertext, &key_alphabet, &key_length, &message_alphabet, &message_length, &useCpu, &useGpu);
+    usage();
 
-    int message_length = 4;
-    char *message_alphabet = "kpmqaz";
-    print_string_hex(message_alphabet, 6, "Message alphabet:");
-
-    uint64_t ciphertext = 0xc5697270d51e09a4;
-    print_hex(ciphertext, "Ciphertext_hex:");
-    
-    /*
-    int key_length = 5;
-    char *key_alphabet = "abcdefghmnop";
-    print_string_hex(key_alphabet, 5, "Key alphabet:");
-
-    int message_length = 3;
-    char *message_alphabet = "abc";
-    print_string_hex(message_alphabet, 3, "Message alphabet:");
-
-    uint64_t ciphertext = 0xb7ec1a731f8806f8;
-    print_hex(ciphertext, "Ciphertext_hex:");
-    */
+    printf("\n\nParameters: ");
+    print_hex(ciphertext, "Ciphertext: ");
+    printf("Key length: %d\n", key_length);
+    printf("Key alphabet: %s\n", key_alphabet);
+    printf("Message length: %d\n", message_length);
+    printf("Message alphabet: %s\n", message_alphabet);
+    printf("Use cpu: %s\n", useCpu ? "true" : "false");
+    printf("Use gpu: %s\n", useGpu ? "true" : "false");
+    printf("\n");
 
     if (useCpu)
     {
