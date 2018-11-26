@@ -25,14 +25,14 @@ bool cmdOptionExists(char** begin, char** end, const std::string& option)
 void usage()
 {
 	std::cout << "CUDA DES Cracker\n";
-	printf("\t--cipher <hex> \tCiphertext to crack\n");
-	printf("\t--key-alphabet <alphabet> \tAlphabet of possible chars in the key\n");
-	printf("\t--key-length <length (1-8 chars)> \tLength of the key\n");
-	printf("\t--message-alphabet <alphabet> \tAlphabet of possible chars in the message\n");
-	printf("\t--message-length <length (1-8 chars)> \tLength of the message\n");
-	printf("\t--cpu \tRun CPU des cracker (opcjonalne default=false)\n");
-	printf("\t--gpu \tRun GPU des cracker (opcjonalne default=false)\n");
-	printf("\tExample: ./des --cipher c5697270d51e09a4 --key-alphabet qadwczd --key-length 5 --message-alphabet kpmqaz --message-length 4 --cpu --gpu\n");
+	printf("\t--cipher <hex>                        Ciphertext to crack\n");
+	printf("\t--key-alphabet <alphabet>             Alphabet of possible chars in the key\n");
+	printf("\t--key-length <length (1-8 chars)>     Length of the key\n");
+	printf("\t--message-alphabet <alphabet>         Alphabet of possible chars in the message\n");
+	printf("\t--message-length <length (1-8 chars)> Length of the message\n");
+	printf("\t--run-cpu [optional]                  Run CPU des cracker\n");
+	printf("\t--run-gpu [optional]                  Run GPU des cracker\n");
+	printf("\Example: ./des --cipher c5697270d51e09a4 --key-alphabet qadwczd --key-length 5 --message-alphabet kpmqaz --message-length 4 --cpu --gpu\n");
 }
 
 void get_parameters(int argc, char** argv, uint64_t *cipher, char **key_alphabet, int *key_length,
@@ -48,11 +48,11 @@ void get_parameters(int argc, char** argv, uint64_t *cipher, char **key_alphabet
 		usage();
 		exit(0);
     }
-	if(cmdOptionExists(argv, argv + argc, "--cpu"))
+	if(cmdOptionExists(argv, argv + argc, "--run-cpu"))
     {
 		*cpu = true;
     }
-	if(cmdOptionExists(argv, argv + argc, "--gpu"))
+	if(cmdOptionExists(argv, argv + argc, "--run-gpu"))
     {
 		*gpu = true;
     }
