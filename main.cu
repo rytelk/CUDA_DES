@@ -23,7 +23,7 @@ int main(int argc, char** argv)
     get_parameters(argc, argv, &ciphertext, &key_alphabet, &key_length, &message_alphabet, &message_length, &useCpu, &useGpu);
     usage();
 
-    printf("\n\nParameters: ");
+    printf("\n\nParameters: \n");
     print_hex(ciphertext, "Ciphertext: ");
     printf("Key length: %d\n", key_length);
     printf("Key alphabet: %s\n", key_alphabet);
