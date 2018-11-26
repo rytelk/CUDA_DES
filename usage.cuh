@@ -32,7 +32,7 @@ void usage()
 	printf("\t--message-length <length (1-8 chars)> Length of the message\n");
 	printf("\t--run-cpu [optional]                  Run CPU des cracker\n");
 	printf("\t--run-gpu [optional]                  Run GPU des cracker\n");
-	printf("\Example: ./des --cipher c5697270d51e09a4 --key-alphabet qadwczd --key-length 5 --message-alphabet kpmqaz --message-length 4 --cpu --gpu\n");
+	printf("\Example: ./des --cipher c5697270d51e09a4 --key-alphabet qadwczd --key-length 5 --message-alphabet kpmqaz --message-length 4 --run-cpu --run-gpu\n");
 }
 
 void get_parameters(int argc, char** argv, uint64_t *cipher, char **key_alphabet, int *key_length,
