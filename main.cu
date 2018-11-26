@@ -10,7 +10,7 @@
 #include "des_bf_cpu.cuh"
 #include "des_bf_gpu.cuh"
 
-int main(void)
+int main(int argc, char** argv)
 {
     int key_length;
     char *key_alphabet;
