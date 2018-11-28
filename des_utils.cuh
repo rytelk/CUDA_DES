@@ -13,13 +13,6 @@ __host__ void prepare_data();
 
 __host__ __device__ uint64_t create_combination(uint64_t combination_number, char* alphabet, int32_t alphabet_length, int32_t combination_length)
 {
-    /*printf("\n--- create_combination params --- \n");
-    printf("combination_number %d\n", combination_number);
-    printf("alphabet %s\n", alphabet);
-    printf("alphabet_length %d\n", alphabet_length);
-    printf("combination_length %d\n", combination_length);
-    printf("--- END PARAMS --- \n\n");*/
-
 	uint64_t result = 0;
 	for (int i = 8; --i >= 8 - combination_length;)
 	{
@@ -42,20 +35,4 @@ __host__ __device__ uint64_t get_combinations_count(int alphabet_length, int inp
     }
     
     return result;
-}
-
-__host__ void prepare_data()
-{
-    char * key = "wcdqa";
-    print_string_hex(key, 5, "Key:");
-
-    char * message = "qazq";
-    int64_t message_hex = 0x71617a71;
-    print_string_hex(message, 4, "Message:");
-
-    uint64_t subkeyes[16];
-    create_subkeyes(0x7763647161, subkeyes, cpu_SHIFTS, cpu_PC_1, cpu_PC_2);
-    
-    uint64_t ciphertext_v = des_encrypt(message_hex, subkeyes, cpu_IP, cpu_IP_REV, cpu_E_BIT, cpu_P, cpu_S);
-    print_hex(ciphertext_v, "Ciphertext_hex:");
 }

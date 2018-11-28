@@ -59,8 +59,7 @@ __device__ __host__ void split_bits64(uint64_t value, uint64_t *left, uint64_t *
 
 __device__ __host__ void print_hex(uint64_t value, std::string prefix)
 {
-    std::cout << prefix << std::endl;
-    std::cout << std::hex << value << std::endl; 
+    std::cout << prefix << std::hex << value << std::endl; 
 }
 
 __device__ __host__ void print_string_hex(char *value, uint64_t length, std::string prefix)
